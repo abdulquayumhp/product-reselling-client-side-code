@@ -1,5 +1,5 @@
 import React from "react";
-import useTitle from "../../../../CustomHook/UseTitle/UseTitle";
+import useTitle from "../../../../../CustomHook/UseTitle/UseTitle";
 
 import "./Homesection.css";
 
