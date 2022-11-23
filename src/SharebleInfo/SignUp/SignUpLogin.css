@@ -1,0 +1,17 @@
+/* @media only screen and (max-width: 1300px) {
+  .container {
+    background-color: crimson;
+    margin: 0;
+  }
+} */
+.container {
+  background: rebeccapurple;
+  width: 400px;
+  height: 400px;
+}
+.box h1 {
+  color: yellow;
+  background: yellow;
+  width: 400px;
+  height: 400px;
+}
