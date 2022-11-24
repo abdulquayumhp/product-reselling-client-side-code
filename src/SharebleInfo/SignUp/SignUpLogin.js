@@ -37,6 +37,7 @@ const SignUpLogin = () => {
 
   // handleSubmition
   const handleSignUp = (data) => {
+    // console.log(data);
     setSignUpError("");
     setLoading(true);
 
@@ -61,7 +62,22 @@ const SignUpLogin = () => {
             const user = update.user;
             handleUpdateUser(data.name, image);
             console.log(user);
+
+            const url = `${process.env.REACT_APP_LOCALHOST}allUser`;
+            // console.log(url);
+            fetch(url, {
+              method: "POST",
+              headers: {
+                "content-type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+              .then((update) => {
+                console.log(update);
+              })
+              .catch((err) => console.log(err));
           })
+          // create user catch
           .catch((err) => {
             console.log(err);
             setFirebaseError(err.message);
@@ -125,6 +141,19 @@ const SignUpLogin = () => {
             placeholder="email"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
           />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
+        <div className="space-y-1 text-sm mb-3">
+          <label htmlFor="password" className="block text-blue-900 text-lg">
+            Enter Your Email
+          </label>
+          <select
+            {...register("role")}
+            className="space-y-1 text-sm mb-3 lg:w-4/5 rounded-3xl py-2 px-2 outline-none "
+          >
+            <option value="seller">seller</option>
+            <option value="Buyer">Buyer</option>
+          </select>
           {errors.email && <p>{errors.email.message}</p>}
         </div>
 

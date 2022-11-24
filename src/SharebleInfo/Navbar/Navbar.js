@@ -127,7 +127,7 @@ const Navbar = () => {
 
           <label tabIndex={0} className="btn btn-ghost btn-circle avatar mr-6">
             {user?.uid ? (
-              <div className="w-10 rounded-full">
+              <div className="w-7 md:w-10  rounded-full">
                 <img src={user?.photoURL} />
               </div>
             ) : (
@@ -135,6 +135,12 @@ const Navbar = () => {
                 <img src="https://www.iconpacks.net/icons/2/free-user-icon-3296-thumb.png" />
               </div>
             )}
+          </label>
+          <label
+            htmlFor="my-drawer-2"
+            className=" drawer-button lg:hidden cursor-pointer text-black pr-4"
+          >
+            <FaBars />
           </label>
         </div>
       </div>
