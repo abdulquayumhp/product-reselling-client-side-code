@@ -12,6 +12,7 @@ const SignUpLogin = () => {
   // usetitle
 
   const [signUpError, setSignUpError] = useState("");
+  const [firebaseError, setFirebaseError] = useState("");
   // handle loading
   // state
 
@@ -36,6 +37,7 @@ const SignUpLogin = () => {
 
   // handleSubmition
   const handleSignUp = (data) => {
+    setSignUpError("");
     setLoading(true);
 
     // image hosting
@@ -60,7 +62,10 @@ const SignUpLogin = () => {
             handleUpdateUser(data.name, image);
             console.log(user);
           })
-          .catch((err) => console.log(err));
+          .catch((err) => {
+            console.log(err);
+            setFirebaseError(err.message);
+          });
 
         const handleUpdateUser = (name, image) => {
           console.log(name, image);
@@ -74,7 +79,9 @@ const SignUpLogin = () => {
               navigate("/signIn");
               setLoading(false);
             })
-            .catch((err) => console.error(err));
+            .catch((err) => {
+              console.error(err);
+            });
         };
       });
   };
@@ -84,93 +91,96 @@ const SignUpLogin = () => {
   //return start
   return (
     <>
-      {loading ? (
-        <Loding />
-      ) : (
-        <form
-          onSubmit={handleSubmit(handleSignUp)}
-          className="py-14 px-10 lg:px-0 lg:mx-5 container"
-        >
-          <h1 className="text-3xl font-bold text-blue-900">SignUp</h1>
-          <p className="mb-10 pt-5">
-            See your growth and get consulting support!
-          </p>
+      <form
+        onSubmit={handleSubmit(handleSignUp)}
+        className="py-14 px-10 lg:px-0 lg:mx-5 container"
+      >
+        <h1 className="text-3xl font-bold text-blue-900">SignUp</h1>
+        <p className="mb-10 pt-5">
+          See your growth and get consulting support!
+        </p>
 
-          <div className="divider w-10/12 pr-5 ">OR</div>
+        <div className="divider w-10/12 pr-5 ">OR</div>
 
-          <div className="space-y-1 text-sm mb-3">
-            <label htmlFor="password" className="block text-blue-900 text-lg">
-              Enter Your Name
-            </label>
-            <input
-              type="text"
-              name="password"
-              {...register("name", { required: "name is required" })}
-              placeholder="name"
-              className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
-            />
-          </div>
-          <div className="space-y-1 text-sm mb-3">
-            <label htmlFor="password" className="block text-blue-900 text-lg">
-              Enter Your Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              {...register("email", { required: "email is required" })}
-              placeholder="email"
-              className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
-            />
-            {errors.email && <p>{errors.email.message}</p>}
-          </div>
+        <div className="space-y-1 text-sm mb-3">
+          <label htmlFor="password" className="block text-blue-900 text-lg">
+            Enter Your Name
+          </label>
+          <input
+            type="text"
+            name="password"
+            {...register("name", { required: "name is required" })}
+            placeholder="name"
+            className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
+          />
+        </div>
+        <div className="space-y-1 text-sm mb-3">
+          <label htmlFor="password" className="block text-blue-900 text-lg">
+            Enter Your Email
+          </label>
+          <input
+            type="email"
+            name="email"
+            {...register("email", { required: "email is required" })}
+            placeholder="email"
+            className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
+          />
+          {errors.email && <p>{errors.email.message}</p>}
+        </div>
 
-          <div className="flex space-x-4 items-center">
-            <label
-              htmlFor="image"
-              className="p-3 text-center  cursor-pointer  font-bold border  hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-900 hover:border-white hover:text-white bg-blue-100 text-black rounded-3xl placeholder-black border-blue-400"
-            >
-              <input
-                type="file"
-                name="image"
-                id="image"
-                accept="image/*"
-                {...register("image", { required: "photo is required" })}
-                hidden
-              />
-              <h1 className="md:w-56 w-26">Upload Image</h1>
-              {errors.image && <p>{errors.image.message}</p>}
-            </label>
-          </div>
-          <div className="space-y-1 text-sm mb-3">
-            <label htmlFor="password" className="block text-blue-900 text-lg">
-              Password
-            </label>
+        <div className="flex space-x-4 items-center">
+          <label
+            htmlFor="image"
+            className="p-3 text-center  cursor-pointer  font-bold border  hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-900 hover:border-white hover:text-white bg-blue-100 text-black rounded-3xl placeholder-black border-blue-400"
+          >
             <input
-              type="password"
-              name="password"
-              {...register("password", {
-                required: "password is required",
-                minLength: {
-                  value: 6,
-                  message: "password must have long",
-                },
-              })}
-              placeholder="pass"
-              className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
+              type="file"
+              name="image"
+              id="image"
+              accept="image/*"
+              {...register("image", { required: "photo is required" })}
+              hidden
             />
-            {errors.password && <p>{errors.password.message}</p>}
-          </div>
-          <div className="space-y-1 text-sm mt-10 ">
+            <h1 className="md:w-56 w-26">Upload Image</h1>
+            {errors.image && <p>{errors.image.message}</p>}
+          </label>
+        </div>
+        <div className="space-y-1 text-sm mb-3">
+          <label htmlFor="password" className="block text-blue-900 text-lg">
+            Password
+          </label>
+          <input
+            type="password"
+            name="password"
+            {...register("password", {
+              required: "password is required",
+              minLength: {
+                value: 6,
+                message: "password must have long",
+              },
+            })}
+            placeholder="pass"
+            className="lg:w-4/5 border-blue-400 border  w-full px-4 py-3 rounded-3xl bg-blue-100 text-black outline-none placeholder-black"
+          />
+          {errors.password && <p>{errors.password.message}</p>}
+        </div>
+        <div className="space-y-1 text-sm mt-10 ">
+          {loading ? (
+            <Loding />
+          ) : (
             <input
               type="submit"
-              value="SUBMIT"
-              className="lg:w-4/5 border-white border  w-full px-4 py-3 rounded-3xl hover:bg-blue-200 bg-blue-300 text-white outline-none placeholder-white"
+              value="SignIn"
+              className="lg:w-4/5 border-white border  w-full px-4 py-3 rounded-3xl hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black"
             />
-          </div>
+          )}
+        </div>
 
-          <div>{signUpError && <p>{signUpError}</p>}</div>
-        </form>
-      )}
+        <div>{signUpError && <p>{signUpError}</p>}</div>
+        <p className="text-red-500">
+          {firebaseError && firebaseError + "please try again"}
+        </p>
+      </form>
     </>
   );
 };
