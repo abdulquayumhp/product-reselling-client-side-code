@@ -5,7 +5,7 @@ import { UserContext } from "../../AuthContext/AuthContext";
 
 const Navbar = () => {
   const { user, userSignOut } = useContext(UserContext);
-  console.log(user?.photoURL);
+  // console.log(user?.photoURL);
 
   // handle signout
 
@@ -59,13 +59,28 @@ const Navbar = () => {
             >
               <div className="mx-auto text-center">{navbarLi}</div>
               {/* sign in and up menu in mobile  */}
-              <div className="md:hidden mx-auto ">
-                <li>
-                  <Link to="/signIn">SignIn</Link>
-                </li>
-                <li>
-                  <Link to="/signUp">signUp</Link>
-                </li>
+              <div className="md:hidden mx-auto text-center">
+                {user?.uid ? (
+                  <>
+                    <li>
+                      <button className="ml-3" onClick={handleSignOut}>
+                        SignOut
+                      </button>
+                    </li>
+                    <li>
+                      <Link to="/Dashboard">Dashboard</Link>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link to="/signIn">SignIn</Link>
+                    </li>
+                    <li>
+                      <Link to="/signUp">signUp</Link>
+                    </li>
+                  </>
+                )}
               </div>
             </ul>
           </div>
@@ -90,9 +105,14 @@ const Navbar = () => {
         <div className="navbar-end md:pr-20">
           <ul className="font-medium bg-blue-200 text-black text menu  p-0 text-center  ">
             {user?.uid ? (
-              <li>
-                <button onClick={handleSignOut}>SignOut</button>
-              </li>
+              <div className="md:flex hidden">
+                <li>
+                  <button onClick={handleSignOut}>SignOut</button>
+                </li>
+                <li>
+                  <Link to="/Dashboard">Dashboard</Link>
+                </li>
+              </div>
             ) : (
               <div className="md:flex hidden ">
                 <li>

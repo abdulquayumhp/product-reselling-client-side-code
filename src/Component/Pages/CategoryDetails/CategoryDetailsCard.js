@@ -1,7 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
-const CategoryDetailsCard = ({ item, setResellProduct }) => {
+const CategoryDetailsCard = ({ item, setResellProduct, handleReport }) => {
   // console.log(item);
   const {
     capacity,
@@ -50,9 +49,12 @@ const CategoryDetailsCard = ({ item, setResellProduct }) => {
             {/* <label className="btn">open modal</label> */}
           </div>
           <div className="pr-10 pb-5">
-            <Link className="bg-blue-100 hover:bg-blue-300 py-2 px-4 cursor-pointer text-sm">
+            <label
+              onClick={() => handleReport(item)}
+              className="bg-blue-100 hover:bg-blue-300 py-2 px-4 cursor-pointer text-sm"
+            >
               report
-            </Link>
+            </label>
           </div>
         </div>
       </div>

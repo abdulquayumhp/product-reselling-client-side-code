@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import Loding from "../../../../../SharebleInfo/Lodin/Loding";
-
 import HomeCategoryCard from "./HomeCategoryCard";
 
 const HomeCategory = () => {

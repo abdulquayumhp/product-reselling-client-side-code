@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { UserContext } from "../../../AuthContext/AuthContext";
 
 const Bookings = ({ resellProduct, setResellProduct }) => {
@@ -24,7 +25,7 @@ const Bookings = ({ resellProduct, setResellProduct }) => {
   const handleModelSubmit = (e) => {
     e.preventDefault();
 
-    const Data = {
+    const data = {
       capacity,
       color,
       location,
@@ -34,22 +35,22 @@ const Bookings = ({ resellProduct, setResellProduct }) => {
       resale_price,
       years_of_use,
       category,
-      _id,
       product_id,
       user: user.email,
     };
-    // setModalData(Data);
-    const url = `${process.env.REACT_APP_LOCALHOST}modalData`;
-    console.log(url);
+    console.log(data);
+    const url = `http://localhost:8000/modalData`;
+    // console.log(url);
     fetch(url, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(Data),
+      body: JSON.stringify(data),
     })
       .then((update) => {
         console.log(update);
+        toast.success("booking successful");
       })
       .catch((err) => console.log(err));
   };

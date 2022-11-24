@@ -4,6 +4,7 @@ import SignUp from "../../../SharebleInfo/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
 import Bookings from "../../Pages/Bookings/Bookings";
 import CategoryDetails from "../../Pages/CategoryDetails/CategoryDetails";
+import Dasboard from "../../Pages/Dashboard/Dasboard";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
 import Service from "../../Pages/Service/Service";
 import Main from "../Main/Main";
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp />,
+      },
+      {
+        path: "/dashboard",
+        element: <Dasboard />,
       },
     ],
   },

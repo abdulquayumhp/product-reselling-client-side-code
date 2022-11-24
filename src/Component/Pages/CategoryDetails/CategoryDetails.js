@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import Bookings from "../Bookings/Bookings";
 import CategoryDetailsCard from "./CategoryDetailsCard";
@@ -7,7 +8,40 @@ const CategoryDetails = () => {
   const resellAllData = useLoaderData();
 
   const [resellProduct, setResellProduct] = useState(null);
-  // console.log(resellCategoryDetails);
+  const [resellReport, setResellReport] = useState(null);
+  console.log(resellReport);
+
+  const handleReport = (data) => {
+    const report = {
+      data: data.capacity,
+      color: data.color,
+      location: data.location,
+      name: data.name,
+      original_Price: data.original_Price,
+      picture: data.picture,
+      resale_price: data.resale_price,
+      years_of_use: data.years_of_use,
+      category: data.category,
+      product_id: data.product_id,
+      role: data.role,
+    };
+    // console.log(report);
+
+    const url = `${process.env.REACT_APP_LOCALHOST}ReportData`;
+    console.log(url);
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(report),
+    })
+      .then((update) => {
+        console.log(update);
+        toast.success("report successful");
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div className=" rounded-lg my-20 ">
@@ -17,6 +51,7 @@ const CategoryDetails = () => {
             item={item}
             key={item._id}
             setResellProduct={setResellProduct}
+            handleReport={handleReport}
           />
         ))}
       </div>
