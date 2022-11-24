@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import SignIn from "../../../SharebleInfo/SigIn/SignIn";
 import SignUp from "../../../SharebleInfo/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
+import Bookings from "../../Pages/Bookings/Bookings";
 import CategoryDetails from "../../Pages/CategoryDetails/CategoryDetails";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
 import Service from "../../Pages/Service/Service";
@@ -30,6 +31,11 @@ export const router = createBrowserRouter([
         element: <CategoryDetails />,
         loader: ({ params }) =>
           fetch(`http://localhost:8000/home/category/${params.id}`),
+      },
+      {
+        path: "/booking/:id",
+        element: <Bookings />,
+        loader: ({ params }) => fetch(``),
       },
     ],
   },
