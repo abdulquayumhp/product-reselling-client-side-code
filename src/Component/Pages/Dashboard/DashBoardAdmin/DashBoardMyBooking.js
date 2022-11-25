@@ -9,7 +9,11 @@ const DashBoardMyBooking = () => {
   const url = `${process.env.REACT_APP_LOCALHOST}MyBookings?email=${user?.email}`;
   // console.log(url);
 
-  const { data: resellMyBooking, isLoading } = useQuery({
+  const {
+    data: resellMyBooking,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["ResellMyBooking", user?.email],
     queryFn: async () => {
       const res = await fetch(url, {
@@ -27,13 +31,11 @@ const DashBoardMyBooking = () => {
     const url = `${process.env.REACT_APP_LOCALHOST}myBookingDelete/${id}`;
 
     fetch(url)
-    .then(res => res.json())
-    .then(update => {
-      console.log(delete)
-    })
-
-
-
+      .then((res) => res.json())
+      .then((update) => {
+        console.log(update.data);
+        refetch();
+      });
   };
 
   if (isLoading) {
