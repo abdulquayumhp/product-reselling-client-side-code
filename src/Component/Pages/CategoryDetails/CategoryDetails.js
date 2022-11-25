@@ -9,7 +9,9 @@ const CategoryDetails = () => {
 
   const [resellProduct, setResellProduct] = useState(null);
   const [resellReport, setResellReport] = useState(null);
-  console.log(resellReport);
+  // console.log(resellReport);
+
+  const [error, setError] = useState("");
 
   const handleReport = (data) => {
     const report = {
@@ -40,7 +42,10 @@ const CategoryDetails = () => {
         console.log(update);
         toast.success("report successful");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err.message);
+        toast.success("err.message");
+      });
   };
 
   return (

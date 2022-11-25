@@ -25,7 +25,7 @@ const Bookings = ({ resellProduct, setResellProduct }) => {
   const handleModelSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
+    const modalData = {
       capacity,
       color,
       location,
@@ -38,21 +38,30 @@ const Bookings = ({ resellProduct, setResellProduct }) => {
       product_id,
       user: user.email,
     };
-    console.log(data);
-    const url = `http://localhost:8000/modalData`;
+    // console.log(data);
+    const url = `${process.env.REACT_APP_LOCALHOST}modalData`;
+
     // console.log(url);
     fetch(url, {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(modalData),
     })
-      .then((update) => {
-        console.log(update);
-        toast.success("booking successful");
-      })
-      .catch((err) => console.log(err));
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.acknowledged) {
+          console.log("add");
+          toast.success("successfully added");
+          setResellProduct(null);
+        } else {
+          console.log("remove");
+          toast.error("already have an account");
+          setResellProduct(null);
+        }
+      });
   };
 
   return (
