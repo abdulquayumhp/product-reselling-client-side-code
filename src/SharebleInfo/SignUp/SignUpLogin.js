@@ -67,7 +67,10 @@ const SignUpLogin = () => {
             // console.log(url);
 
             const allUser = {
-              data: data,
+              name: data.name,
+              email: data.email,
+              password: data.password,
+              role: data.role,
               image,
             };
 

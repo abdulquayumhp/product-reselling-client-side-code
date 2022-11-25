@@ -12,11 +12,29 @@ const DashBoardMyBooking = () => {
   const { data: resellMyBooking, isLoading } = useQuery({
     queryKey: ["ResellMyBooking", user?.email],
     queryFn: async () => {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
   });
+
+  const handleDelete = (id) => {
+    // console.log(id);
+    const url = `${process.env.REACT_APP_LOCALHOST}myBookingDelete/${id}`;
+
+    fetch(url)
+    .then(res => res.json())
+    .then(update => {
+      console.log(delete)
+    })
+
+
+
+  };
 
   if (isLoading) {
     return <Loding />;
@@ -64,10 +82,17 @@ const DashBoardMyBooking = () => {
                       <td>{resellUser?.capacity}</td>
                       <td>{resellUser?.color}</td>
                       <td>
-                        <button>Delete</button>
+                        <button
+                          onClick={() => handleDelete(resellUser?._id)}
+                          className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300"
+                        >
+                          Delete
+                        </button>
                       </td>
                       <td>
-                        <button>pay</button>
+                        <button className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300">
+                          pay
+                        </button>
                       </td>
                     </tr>
                   </>

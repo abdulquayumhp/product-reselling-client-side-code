@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../AuthContext/AuthContext";
+import useToken from "../../CustomHook/UseToken/UseToken";
 import Loding from "../Lodin/Loding";
 
 const SignInLogin = () => {
@@ -15,6 +16,11 @@ const SignInLogin = () => {
   const { userLogin, setLoading, loading, googleSignUp } =
     useContext(UserContext);
   //   console.log(userLogin);
+
+  //useToken
+  const [loginUserEmail, setLoginUserEmail] = useState("");
+  console.log(loginUserEmail);
+  const [token] = useToken(loginUserEmail);
 
   const {
     register,
@@ -28,10 +34,11 @@ const SignInLogin = () => {
     userLogin(data.email, data.password)
       .then((update) => {
         const user = update.user;
-        console.log(user);
+        // console.log(user);
         toast.success("successfully login");
+        setLoginUserEmail(data.email);
         setLoading(false);
-        navigate("/");
+        // navigate("/");
       })
       .catch((err) => {
         console.log(err);

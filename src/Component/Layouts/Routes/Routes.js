@@ -8,6 +8,7 @@ import Dasboard from "../../Pages/Dashboard/Dasboard";
 import DashBoardAdmin from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAdmin";
 import DashBoardAllReport from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAllReport";
 import DashBoardMyBooking from "../../Pages/Dashboard/DashBoardAdmin/DashBoardMyBooking";
+import DashboardForAll from "../../Pages/Dashboard/DashboardForAll/DashboardForAll";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
 import Service from "../../Pages/Service/Service";
 import Main from "../Main/Main";
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/Admin",
         element: <DashBoardAdmin />,
+      },
+      {
+        path: "/dashboard",
+        element: <DashboardForAll />,
       },
       {
         path: "/dashboard/dashboardAllReport",

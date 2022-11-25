@@ -8,7 +8,11 @@ const DashboardAllUser = () => {
   const { data: resellAllUser, isLoading } = useQuery({
     queryKey: ["ResellAllUser"],
     queryFn: async () => {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: {
+          authorization: `bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -41,9 +45,9 @@ const DashboardAllUser = () => {
                         src={resellUser.image}
                       />
                     </th>
-                    <td>{resellUser.data.name}</td>
-                    <td>{resellUser.data.email}</td>
-                    <td>{resellUser.data.role}</td>
+                    <td>{resellUser.name}</td>
+                    <td>{resellUser.email}</td>
+                    <td>{resellUser.role}</td>
                   </tr>
                 </>
               ))}
