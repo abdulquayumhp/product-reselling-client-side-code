@@ -1,9 +1,10 @@
 import React from "react";
+import DashboardAllUser from "./DashboardAllUser";
 
 const DashBoardAdmin = () => {
   return (
     <div>
-      <h1>admin</h1>
+      <DashboardAllUser />
     </div>
   );
 };

@@ -65,12 +65,18 @@ const SignUpLogin = () => {
 
             const url = `${process.env.REACT_APP_LOCALHOST}allUser`;
             // console.log(url);
+
+            const allUser = {
+              data: data,
+              image,
+            };
+
             fetch(url, {
               method: "POST",
               headers: {
                 "content-type": "application/json",
               },
-              body: JSON.stringify(data),
+              body: JSON.stringify(allUser),
             })
               .then((update) => {
                 console.log(update);

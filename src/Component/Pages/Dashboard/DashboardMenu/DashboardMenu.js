@@ -54,7 +54,7 @@ const DashboardMenu = () => {
           </Link>
 
           <Link
-            to="/"
+            to="/dashboard/dashboardAllReport"
             class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
           >
             <FaRegTrashAlt />
@@ -63,11 +63,11 @@ const DashboardMenu = () => {
           </Link>
 
           <Link
-            to="/"
+            to="/dashboard/dashboardMyBooking"
             class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
           >
             <FaRegHourglass />
-            <span class="mx-4 font-medium">All Bookings</span>
+            <span class="mx-4 font-medium">My Bookings</span>
           </Link>
         </nav>
       </div>

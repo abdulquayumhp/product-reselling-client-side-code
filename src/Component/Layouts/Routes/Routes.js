@@ -4,9 +4,10 @@ import SignUp from "../../../SharebleInfo/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
 import Bookings from "../../Pages/Bookings/Bookings";
 import CategoryDetails from "../../Pages/CategoryDetails/CategoryDetails";
-import DashboardMain from "../../Pages/DasboardMain/DashboardMain";
 import Dasboard from "../../Pages/Dashboard/Dasboard";
 import DashBoardAdmin from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAdmin";
+import DashBoardAllReport from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAllReport";
+import DashBoardMyBooking from "../../Pages/Dashboard/DashBoardAdmin/DashBoardMyBooking";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
 import Service from "../../Pages/Service/Service";
 import Main from "../Main/Main";
@@ -55,19 +56,23 @@ export const router = createBrowserRouter([
         path: "/signUp",
         element: <SignUp />,
       },
-      {
-        path: "/dashboard",
-        element: <Dasboard />,
-      },
     ],
   },
   {
-    path: "/Dashboard",
-    element: <DashboardMain />,
+    path: "/dashboard",
+    element: <Dasboard />,
     children: [
       {
-        path: "/Dashboard/Admin",
+        path: "/dashboard/Admin",
         element: <DashBoardAdmin />,
+      },
+      {
+        path: "/dashboard/dashboardAllReport",
+        element: <DashBoardAllReport />,
+      },
+      {
+        path: "/dashboard/dashboardMyBooking",
+        element: <DashBoardMyBooking />,
       },
     ],
   },
