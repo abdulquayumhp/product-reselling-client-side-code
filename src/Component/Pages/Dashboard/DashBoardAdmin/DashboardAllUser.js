@@ -1,9 +1,15 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../../../../AuthContext/AuthContext";
+import useAdmin from "../../../../CustomHook/UserEmail/UserEmail";
 
 const DashboardAllUser = () => {
   const url = `${process.env.REACT_APP_LOCALHOST}ResellAllUser`;
   // console.log(url);
+
+  const { user } = useContext(UserContext);
+
+  const [email] = useAdmin(user?.email);
 
   const { data: resellAllUser, isLoading } = useQuery({
     queryKey: ["ResellAllUser"],

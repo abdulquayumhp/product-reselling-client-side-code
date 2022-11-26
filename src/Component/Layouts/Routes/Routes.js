@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import ProtectedRoute from "../../../CustomHook/PrivateRoute/ProtectedRoute";
 import SignIn from "../../../SharebleInfo/SigIn/SignIn";
 import SignUp from "../../../SharebleInfo/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
@@ -33,7 +34,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/home/category/:id",
-        element: <CategoryDetails />,
+        element: (
+          <ProtectedRoute>
+            <CategoryDetails />
+          </ProtectedRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:8000/home/category/${params.id}`),
       },

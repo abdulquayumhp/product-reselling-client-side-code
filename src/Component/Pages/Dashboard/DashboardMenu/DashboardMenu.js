@@ -7,9 +7,12 @@ import {
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../../AuthContext/AuthContext";
+import useAdmin from "../../../../CustomHook/UserEmail/UserEmail";
 
 const DashboardMenu = () => {
   const { user } = useContext(UserContext);
+  const [email] = useAdmin(user?.email);
+  // console.log(email.role);
   return (
     <div class="flex flex-col  h-full py-8  border-r dark:bg-gray-900 dark:border-gray-700">
       <Link to="/">
@@ -37,34 +40,76 @@ const DashboardMenu = () => {
       </div>
 
       <div class="flex flex-col justify-between flex-1 mt-6">
-        <nav>
-          <Link
-            to="/dashboard"
-            class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
-          >
-            <FaDatabase />
+        {email?.role === "admin" ? (
+          <nav>
+            <>
+              <Link
+                to="/dashboard"
+                class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+              >
+                <FaDatabase />
 
-            <span class="mx-4 font-medium">Dashboard</span>
-          </Link>
+                <span class="mx-4 font-medium">Dashboard</span>
+              </Link>
 
-          <Link
-            to="/dashboard/Admin"
-            class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
-          >
-            <FaUserAlt />
+              <Link
+                to="/dashboard/Admin"
+                class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaUserAlt />
 
-            <span class="mx-4 font-medium">All User</span>
-          </Link>
+                <span class="mx-4 font-medium">All User</span>
+              </Link>
+              <Link
+                to="/dashboard/dashboardMyBooking"
+                class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaRegHourglass />
+                <span class="mx-4 font-medium">My Bookings</span>
+              </Link>
+              <Link
+                to="/dashboard/dashboardAllReport"
+                class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaRegTrashAlt />
 
-          <Link
-            to="/dashboard/dashboardAllReport"
-            class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
-          >
-            <FaRegTrashAlt />
+                <span class="mx-4 font-medium">All Report</span>
+              </Link>
+            </>
+          </nav>
+        ) : (
+          ""
+        )}
+        {email?.role === "seller" ? (
+          <nav>
+            <>
+              <Link
+                to="/dashboard"
+                class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+              >
+                <FaDatabase />
 
-            <span class="mx-4 font-medium">All Report</span>
-          </Link>
+                <span class="mx-4 font-medium">Dashboard</span>
+              </Link>
 
+              <Link
+                to="/dashboard/dashboardMyBooking"
+                class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaRegHourglass />
+                <span class="mx-4 font-medium">My Bookings</span>
+              </Link>
+              <Link
+                to="/dashboard/dashboardAllReport"
+                class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+              >
+                <FaRegTrashAlt />
+
+                <span class="mx-4 font-medium">All Report</span>
+              </Link>
+            </>
+          </nav>
+        ) : (
           <Link
             to="/dashboard/dashboardMyBooking"
             class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
@@ -72,10 +117,21 @@ const DashboardMenu = () => {
             <FaRegHourglass />
             <span class="mx-4 font-medium">My Bookings</span>
           </Link>
-        </nav>
+        )}
       </div>
     </div>
   );
 };
 
 export default DashboardMenu;
+
+{
+  /* <Link
+            to="/dashboard/dashboardAllReport"
+            class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+          >
+            <FaRegTrashAlt />
+
+            <span class="mx-4 font-medium">All Report</span>
+          </Link> */
+}
