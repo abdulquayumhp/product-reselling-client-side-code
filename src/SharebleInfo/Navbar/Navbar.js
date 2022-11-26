@@ -1,18 +1,20 @@
 import React, { useContext } from "react";
 import { FaBars } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../../AuthContext/AuthContext";
 
 const Navbar = () => {
   const { user, userSignOut } = useContext(UserContext);
   // console.log(user?.photoURL);
 
+  const navigate = useNavigate();
   // handle signout
 
   const handleSignOut = () => {
     userSignOut()
       .then((update) => {
         console.log(update);
+        navigate("/signIn");
       })
       .catch((err) => console.log(err));
   };

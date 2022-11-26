@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import {
   FaDatabase,
+  FaEgg,
   FaRegHourglass,
   FaRegTrashAlt,
   FaShopify,
@@ -118,23 +119,32 @@ const DashboardMenu = () => {
                 <span class="mx-4 font-medium">My Bookings</span>
               </Link>
               <Link
-                to="/dashboard/dashboardAllReport"
+                to="/dashboard/addProduct"
                 class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
               >
-                <FaRegTrashAlt />
-
-                <span class="mx-4 font-medium">All Report</span>
+                <FaEgg />
+                <span class="mx-4 font-medium">Add Product</span>
               </Link>
             </>
           </nav>
         ) : (
-          <Link
-            to="/dashboard/dashboardMyBooking"
-            class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
-          >
-            <FaRegHourglass />
-            <span class="mx-4 font-medium">My Bookings</span>
-          </Link>
+          <>
+            <Link
+              to="/dashboard"
+              class="flex items-center px-4 py-2 text-gray-700 bg-gray-100 dark:bg-gray-800 dark:text-gray-200"
+            >
+              <FaDatabase />
+
+              <span class="mx-4 font-medium">Dashboard</span>
+            </Link>
+            <Link
+              to="/dashboard/dashboardMyBooking"
+              class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
+            >
+              <FaRegHourglass />
+              <span class="mx-4 font-medium">My Bookings</span>
+            </Link>
+          </>
         )}
       </div>
     </div>

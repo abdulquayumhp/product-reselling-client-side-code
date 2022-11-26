@@ -6,6 +6,7 @@ import Blog from "../../Pages/Blog/Blog";
 import Bookings from "../../Pages/Bookings/Bookings";
 import CategoryDetails from "../../Pages/CategoryDetails/CategoryDetails";
 import Dasboard from "../../Pages/Dashboard/Dasboard";
+import DashBoardAddProduct from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAddProduct";
 import DashBoardAdmin from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAdmin";
 import DashboardAllBuyer from "../../Pages/Dashboard/DashBoardAdmin/DashboardAllBuyer";
 import DashBoardAllReport from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAllReport";
@@ -93,6 +94,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/dashboardAllSeller",
         element: <DashboardAllSeller />,
+      },
+      {
+        path: "/dashboard/addProduct",
+        element: <DashBoardAddProduct />,
       },
     ],
   },
