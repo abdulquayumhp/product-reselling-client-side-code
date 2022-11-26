@@ -19,7 +19,7 @@ const SignInLogin = () => {
 
   //useToken
   const [loginUserEmail, setLoginUserEmail] = useState("");
-  console.log(loginUserEmail);
+  // console.log(loginUserEmail);
   const [token] = useToken(loginUserEmail);
 
   const {
@@ -34,10 +34,11 @@ const SignInLogin = () => {
     userLogin(data.email, data.password)
       .then((update) => {
         const user = update.user;
-        // console.log(user);
-        toast.success("successfully login");
+        console.log(user);
         setLoginUserEmail(data.email);
         setLoading(false);
+        toast.success("successfully login");
+
         // navigate("/");
       })
       .catch((err) => {
@@ -51,10 +52,31 @@ const SignInLogin = () => {
     // console.log("hello");
     googleSignUp()
       .then((update) => {
-        console.log(update);
-        toast.success("successfully google login");
+        const user = update.user;
+        console.log("google", user);
+        setLoginUserEmail(user.email);
         setLoading(false);
-        navigate("/");
+        toast.success("successfully Google login");
+        const url = `${process.env.REACT_APP_LOCALHOST}allUser`;
+        // console.log(url);
+
+        const item = {
+          name: user.displayName,
+          email: user.email,
+          role: "Buyer",
+          image: user.photoURL,
+        };
+        // console.log(item);
+
+        fetch(url, {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(item),
+        });
+
+        // navigate("/");
       })
       .catch((err) => {
         console.log(err);
