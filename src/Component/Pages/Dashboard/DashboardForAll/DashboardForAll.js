@@ -15,7 +15,7 @@ const DashboardForAll = () => {
           <h1 className="text-5xl font-bold ">Welcome {email?.displayName}</h1>
           <br />
           <p className="text-3xl font-medium text-blue-400">
-            To become a our {email.role}{" "}
+            To become a our {email.role}
           </p>
         </div>
       </div>

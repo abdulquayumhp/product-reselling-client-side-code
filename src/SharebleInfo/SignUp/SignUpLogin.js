@@ -43,6 +43,7 @@ const SignUpLogin = () => {
 
     // image hosting
     const image = data.image[0];
+    console.log(image)
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -53,7 +54,7 @@ const SignUpLogin = () => {
       .then((res) => res.json())
       .then((imgData) => {
         const image = imgData.data.url;
-        console.log(image);
+        // console.log(image);
         // console.log(data.name);
 
         // data send in firebase
@@ -61,7 +62,7 @@ const SignUpLogin = () => {
           .then((update) => {
             const user = update.user;
             handleUpdateUser(data.name, image);
-            console.log(user);
+            // console.log(user);
 
             const url = `${process.env.REACT_APP_LOCALHOST}allUser`;
             // console.log(url);

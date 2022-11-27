@@ -1,8 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext, useState } from "react";
+import { toast } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../../../AuthContext/AuthContext";
 import Loding from "../../../../SharebleInfo/Lodin/Loding";
+
+import axios from "axios";
 
 const DashBoardAddProduct = () => {
   // usetitle
@@ -20,8 +23,7 @@ const DashBoardAddProduct = () => {
   //loding
 
   // context
-  const { createUser, updateUser, loading, setLoading } =
-    useContext(UserContext);
+  const { user, loading, setLoading } = useContext(UserContext);
   // console.log(createUser);
 
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ const DashBoardAddProduct = () => {
       return data;
     },
   });
-  // console.log(homeCategories);
+  console.log(homeCategories);
 
   // useForm code
 
@@ -50,42 +52,48 @@ const DashBoardAddProduct = () => {
     data.preventDefault();
     const image = data.target.image.files[0];
     // console.log(image);
-    const input = data.target.Categories.category_name.value;
-    console.log(input);
 
-    // setSignUpError("");
-    // setLoading(true);
+    setSignUpError("");
+    setLoading(true);
 
-    // // image hosting
+    // image hosting
 
-    // const formData = new FormData();
-    // formData.append("image", image);
-    // const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
-    // fetch(url, {
-    //   method: "POST",
-    //   body: formData,
-    // })
-    //   .then((res) => res.json())
-    //   .then((imgData) => {
-    //     const image = imgData.data.url;
-    //     // console.log(image);
-    //     // console.log(data.name);
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgData) => {
+        const image = imgData.data.url;
+        console.log(image);
 
-    //     const addProduct = {
-    //       productName: data.target.productName.value,
-    //       capacity: data.target.capacity.value,
-    //       input: data.target.category_name.value,
-    //       color: data.target.color.value,
-    //       original_price: data.target.original_price.value,
-    //       years_of_use: data.target.years.value,
-    //       original_price: data.target.original_price.value,
-    //       location: data.target.location.value,
-    //       seller_name: data.target.sellerName.value,
-    //       date: data.target.date.value,
-    //       image,
-    //     };
-    //     console.log(addProduct);
-    //   });
+        axios
+          .post(`${process.env.REACT_APP_LOCALHOST}addSellerProduct`, {
+            category_name: data.target.category.value,
+            name: data.target.productName.value,
+            capacity: data.target.capacity.value,
+            color: data.target.color.value,
+            original_Price: data.target.originalPrice.value,
+            years_of_use: data.target.years.value,
+            resale_price: data.target.resellPrice.value,
+            location: data.target.location.value,
+            seller_name: data.target.sellerName.value,
+            seller_email: data.target.email.value,
+            date: data.target.date.value,
+            seller_img: user?.photoURL,
+            picture: image,
+          })
+          .then((res) => {
+            if (res.data.acknowledged) {
+              toast.success("add product successfully done");
+              setLoading(false);
+              console.log(res);
+            }
+          });
+      });
   };
   if (isLoading) {
     return <Loding />;
@@ -103,7 +111,7 @@ const DashBoardAddProduct = () => {
             Select Category
           </label>
           <select
-            name="Categories?.category_name"
+            name="category"
             className="space-y-1 text-sm mb-3 lg:w-4/5  py-2 px-2 outline-none "
           >
             {homeCategories.map((Categories, i) => (
@@ -169,7 +177,7 @@ const DashBoardAddProduct = () => {
           </label>
           <input
             type="number"
-            name="original_price"
+            name="originalPrice"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
         </div>
@@ -183,8 +191,7 @@ const DashBoardAddProduct = () => {
           </label>
           <input
             type="number"
-            name="
-            resale_price"
+            name="resellPrice"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
         </div>
@@ -220,7 +227,21 @@ years_of_use"
           </label>
           <input
             type="text"
+            defaultValue={user?.displayName}
+            disabled
             name="sellerName"
+            className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
+          />
+        </div>
+        <div className="space-y-1 text-sm mb-3">
+          <label htmlFor="role" className="block text-blue-900 text-lg">
+            seller_email
+          </label>
+          <input
+            type="text"
+            defaultValue={user?.email}
+            disabled
+            name="email"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
         </div>
