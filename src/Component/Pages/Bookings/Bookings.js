@@ -37,8 +37,10 @@ const Bookings = ({ resellProduct, setResellProduct }) => {
       category,
       product_id,
       user: user.email,
+      mobileNumber: e.target.MobileNumber.value,
+      meetingArea: e.target.meetingArea.value,
     };
-    // console.log(data);
+    console.log(modalData);
     const url = `${process.env.REACT_APP_LOCALHOST}modalData`;
 
     // console.log(url);
@@ -112,6 +114,20 @@ const Bookings = ({ resellProduct, setResellProduct }) => {
             type="text"
             defaultValue={location}
             disabled
+          />
+          <p className="pt-1 font-semibold">Mobile Number</p>
+          <input
+            className="w-full border-px border border-gray-300 rounded-sm pb-1 my-2 px-3"
+            type="number"
+            required
+            name="MobileNumber"
+          />
+          <p className="pt-1 font-semibold">Meeting Area</p>
+          <input
+            className="w-full border-px border border-gray-300 rounded-sm pb-1 my-2 px-3"
+            type="text"
+            required
+            name="meetingArea"
           />
           <div className="text-center">
             <input

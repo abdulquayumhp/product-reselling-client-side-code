@@ -82,6 +82,7 @@ const DashBoardAddProduct = () => {
             location: data.target.location.value,
             seller_name: data.target.sellerName.value,
             seller_email: data.target.email.value,
+            Seller_number: data.target.mobileNumber.value,
             date: data.target.date.value,
             seller_img: user?.photoURL,
             picture: image,
@@ -242,6 +243,17 @@ years_of_use"
             defaultValue={user?.email}
             disabled
             name="email"
+            className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
+          />
+        </div>
+
+        <div className="space-y-1 text-sm mb-3">
+          <label htmlFor="Date" className="block text-blue-900 text-lg">
+            MobileNumber
+          </label>
+          <input
+            type="number"
+            name="mobileNumber"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
         </div>

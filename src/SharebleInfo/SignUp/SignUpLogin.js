@@ -43,7 +43,7 @@ const SignUpLogin = () => {
 
     // image hosting
     const image = data.image[0];
-    console.log(image)
+    console.log(image);
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imageHostKey}`;
@@ -153,6 +153,7 @@ const SignUpLogin = () => {
           />
           {errors.email && <p>{errors.email.message}</p>}
         </div>
+
         <div className="space-y-1 text-sm mb-3">
           <label htmlFor="password" className="block text-blue-900 text-lg">
             Enter Your Email

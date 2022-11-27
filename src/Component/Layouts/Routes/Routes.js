@@ -12,6 +12,7 @@ import DashboardAllBuyer from "../../Pages/Dashboard/DashBoardAdmin/DashboardAll
 import DashBoardAllReport from "../../Pages/Dashboard/DashBoardAdmin/DashBoardAllReport";
 import DashboardAllSeller from "../../Pages/Dashboard/DashBoardAdmin/DashboardAllSeller";
 import DashBoardMyBooking from "../../Pages/Dashboard/DashBoardAdmin/DashBoardMyBooking";
+import DashBoardSellerMyProduct from "../../Pages/Dashboard/DashBoardAdmin/DashBoardSellerMyProduct";
 import DashboardForAll from "../../Pages/Dashboard/DashboardForAll/DashboardForAll";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
 import Service from "../../Pages/Service/Service";
@@ -98,6 +99,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/addProduct",
         element: <DashBoardAddProduct />,
+      },
+      {
+        path: "/dashboard/myProduct",
+        element: <DashBoardSellerMyProduct />,
       },
     ],
   },
