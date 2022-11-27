@@ -15,6 +15,7 @@ import DashBoardMyBooking from "../../Pages/Dashboard/DashBoardAdmin/DashBoardMy
 import DashBoardSellerMyProduct from "../../Pages/Dashboard/DashBoardAdmin/DashBoardSellerMyProduct";
 import DashboardForAll from "../../Pages/Dashboard/DashboardForAll/DashboardForAll";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
+import Payment from "../../Pages/Payment/Payment";
 import Service from "../../Pages/Service/Service";
 import Main from "../Main/Main";
 import Sign from "../Sign/Sign";
@@ -44,7 +45,9 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:8000/home/category/${params.id}`),
+          fetch(
+            `https://assaignment-tharteen.vercel.app/home/category/${params.id}`
+          ),
       },
       {
         path: "/booking/:id",
@@ -103,6 +106,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myProduct",
         element: <DashBoardSellerMyProduct />,
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: <Payment />,
+        loader: ({ params }) =>
+          fetch(
+            `https://assaignment-tharteen.vercel.app/bookings/${params.id}`
+          ),
       },
     ],
   },

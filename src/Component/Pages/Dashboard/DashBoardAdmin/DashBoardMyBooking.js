@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { UserContext } from "../../../../AuthContext/AuthContext";
 import Loding from "../../../../SharebleInfo/Lodin/Loding";
 
@@ -26,6 +27,7 @@ const DashBoardMyBooking = () => {
     },
   });
 
+  console.log(resellMyBooking);
   const handleDelete = (id) => {
     // console.log(id);
     const url = `${process.env.REACT_APP_LOCALHOST}myBookingDelete/${id}`;
@@ -42,7 +44,7 @@ const DashBoardMyBooking = () => {
     return <Loding />;
   }
 
-  // console.log(resellMyBooking);
+  console.log(resellMyBooking);
 
   return (
     <div>
@@ -92,9 +94,16 @@ const DashBoardMyBooking = () => {
                         </button>
                       </td>
                       <td>
-                        <button className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300">
-                          pay
-                        </button>
+                        {resellUser?.resale_price && !resellUser.paid && (
+                          <Link to={`/dashboard/payment/${resellUser._id}`}>
+                            <button className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300">
+                              pay
+                            </button>
+                          </Link>
+                        )}
+                        {resellUser?.resale_price && resellUser.paid && (
+                          <p>Paid</p>
+                        )}
                       </td>
                     </tr>
                   </>
