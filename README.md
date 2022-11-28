@@ -2,7 +2,7 @@ website link :https://assaignment-tharteen-62f7b.web.app/signIn
 
 website Name : zolvit reselling Product
 
-description : this website use for reselling furniture product a user can buy a resell product for a seller , and also a user can create a seller account , if he create seller account he can add product , and he can see her product with status ,
+description : this website use for reselling furniture product a user can buy a resell product from a seller , and also a user can create a seller account , if he create seller account he can add product , and he can see her product with status ,
 
 bullet point
 

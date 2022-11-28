@@ -162,8 +162,8 @@ const SignUpLogin = () => {
             {...register("role")}
             className="space-y-1 text-sm mb-3 lg:w-4/5 rounded-3xl py-2 px-2 outline-none "
           >
-            <option value="seller">seller</option>
             <option value="Buyer">Buyer</option>
+            <option value="seller">seller</option>
           </select>
           {errors.email && <p>{errors.email.message}</p>}
         </div>
