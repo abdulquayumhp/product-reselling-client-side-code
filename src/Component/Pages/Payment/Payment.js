@@ -24,10 +24,10 @@ const Payment = () => {
   //   console.log(data);
   return (
     <div className="lg:w-9/12 mx-auto border border-black mt-10 h-[600px] rounded-lg ">
-      <div className="flex ">
-        <div className="w-full lg:w-[600px] ">
+      <div className="flex lg:flex-row  flex-col-reverse">
+        <div className="w-full lg:w-[600px] mx-auto">
           <img
-            className="h-full lg:h-[598px] rounded-l-lg object-cover"
+            className="h-full w-full lg:h-[598px] rounded-l-lg object-cover"
             src={picture}
             alt="/"
           />

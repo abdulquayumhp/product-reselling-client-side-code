@@ -1,7 +1,9 @@
 import React from "react";
+import ExtraSectionHome from "./ExtraSectionHome/ExtraSectionHome";
 import Advertising from "./HeroAdvertising/Advertising";
 import HeroSection from "./HeroSection/HeroSection";
 import HomeCategory from "./HomeCategory/HomeCategory";
+import ReactGallary from "./ReactGallary/ReactGallary";
 
 const HomeAll = () => {
   return (
@@ -9,6 +11,8 @@ const HomeAll = () => {
       <HeroSection />
       <Advertising />
       <HomeCategory />
+      <ReactGallary />
+      <ExtraSectionHome />
     </div>
   );
 };

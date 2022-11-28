@@ -1,7 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { UserContext } from "../../../../AuthContext/AuthContext";
 import useAdmin from "../../../../CustomHook/UserEmail/UserEmail";
+import Loding from "../../../../SharebleInfo/Lodin/Loding";
 
 const DashboardAllUser = () => {
   const url = `${process.env.REACT_APP_LOCALHOST}ResellAllUser`;
@@ -11,7 +13,11 @@ const DashboardAllUser = () => {
 
   const [email] = useAdmin(user?.email);
 
-  const { data: resellAllUser, isLoading } = useQuery({
+  const {
+    data: resellAllUser,
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["ResellAllUser"],
     queryFn: async () => {
       const res = await fetch(url, {
@@ -24,6 +30,22 @@ const DashboardAllUser = () => {
     },
   });
 
+  const handleDelete = (id) => {
+    // console.log(id);
+    const url = `${process.env.REACT_APP_LOCALHOST}allUserDelete/${id}`;
+
+    fetch(url)
+      .then((res) => res.json())
+      .then((update) => {
+        console.log(update.data);
+        refetch();
+        toast.success("successfully user Delete");
+      });
+  };
+
+  if (isLoading) {
+    return <Loding />;
+  }
   console.log(resellAllUser);
 
   return (
@@ -37,6 +59,7 @@ const DashboardAllUser = () => {
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -54,6 +77,14 @@ const DashboardAllUser = () => {
                     <td>{resellUser.name}</td>
                     <td>{resellUser.email}</td>
                     <td>{resellUser.role}</td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(resellUser?._id)}
+                        className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300"
+                      >
+                        Delete
+                      </button>
+                    </td>
                   </tr>
                 </>
               ))}

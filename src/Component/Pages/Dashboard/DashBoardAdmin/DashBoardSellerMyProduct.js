@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { UserContext } from "../../../../AuthContext/AuthContext";
 import useAdmin from "../../../../CustomHook/UserEmail/UserEmail";
 import Loding from "../../../../SharebleInfo/Lodin/Loding";
@@ -10,7 +12,7 @@ const DashBoardSellerMyProduct = () => {
   const role = { role: "seller" };
 
   const [email] = useAdmin(user?.email);
-  console.log(email);
+  // console.log(email);
   const url = `${process.env.REACT_APP_LOCALHOST}MyProduct?email=${user?.email}`;
   // console.log(url);
 
@@ -31,7 +33,9 @@ const DashBoardSellerMyProduct = () => {
     },
   });
 
-  console.log(resellMyProduct);
+  // console.log(url);
+
+  // console.log(resellMyProduct);
 
   const handleDelete = (id) => {
     // console.log(id);
@@ -42,6 +46,38 @@ const DashBoardSellerMyProduct = () => {
       .then((update) => {
         console.log(update.data);
         refetch();
+      });
+  };
+
+  const handleAdvertising = (e) => {
+    console.log(e);
+
+    axios
+      .post(`${process.env.REACT_APP_LOCALHOST}advertisingProduct`, {
+        category_name: e.category_name,
+        name: e.name,
+        capacity: e.capacity,
+        color: e.color,
+        original_Price: e.original_Price,
+        years_of_use: e.years_of_use,
+        resale_price: e.resale_price,
+        location: e.location,
+        seller_name: e.seller_name,
+        seller_email: e.seller_email,
+        Seller_number: e.Seller_number,
+        date: e.date,
+        seller_img: e.seller_img,
+        picture: e.picture,
+      })
+      .then((res) => {
+        console.log(res);
+        if (res.data.acknowledged) {
+          toast.success("add product successfully done");
+          console.log(res);
+          refetch();
+        } else {
+          toast.error("already added advertising section ");
+        }
       });
   };
 
@@ -83,18 +119,27 @@ const DashBoardSellerMyProduct = () => {
                     <td>{resellUser.date}</td>
                     <td>{resellUser.original_Price}</td>
                     <td>{resellUser.resale_price}</td>
+
                     <td>
-                      <button
-                        onClick={() => handleDelete(resellUser?._id)}
-                        className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300"
-                      >
-                        Delete
-                      </button>
+                      {resellUser?.resale_price && !resellUser.paid && (
+                        <button className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300">
+                          unsoald
+                        </button>
+                      )}
+                      {resellUser?.resale_price && resellUser.paid && (
+                        <p>soald</p>
+                      )}
                     </td>
                     <td>
-                      <button className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300">
-                        pay
-                      </button>
+                      {resellUser?.resale_price && !resellUser.paid && (
+                        <button
+                          onClick={() => handleAdvertising(resellUser)}
+                          className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300"
+                        >
+                          advertising
+                        </button>
+                      )}
+                      {resellUser?.resale_price && resellUser.paid && <></>}
                     </td>
                   </tr>
                 </>

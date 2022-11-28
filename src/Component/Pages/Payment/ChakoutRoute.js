@@ -1,4 +1,5 @@
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -86,6 +87,14 @@ const ChakoutRoute = ({ booking }) => {
         transactionId: paymentIntent.id,
         user,
         bookingId: _id,
+        capacity,
+        color,
+        location,
+        name,
+        original_Price,
+        picture,
+        resale_price,
+        years_of_use,
       };
       // payment info in data base
       fetch(`${process.env.REACT_APP_LOCALHOST}payments`, {
@@ -100,9 +109,17 @@ const ChakoutRoute = ({ booking }) => {
         .then((data) => {
           if (data.insertedId) {
             console.log(data);
-            setSuccess("Congrats! your Payment completed");
-            setTransactionId(paymentIntent.id);
-            toast.success("transaction successfully");
+            const url = `${process.env.REACT_APP_LOCALHOST}AllAdvertisingDelete/${resale_price}`;
+            // console.log(url);
+
+            axios.delete(url).then((res) => {
+              console.log(res);
+              if (res.data.acknowledged) {
+                setSuccess("Congrats! your Payment completed");
+                setTransactionId(paymentIntent.id);
+                toast.success("transaction successfully");
+              }
+            });
           }
         });
     }

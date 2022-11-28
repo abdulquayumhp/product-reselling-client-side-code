@@ -25,7 +25,7 @@ const CategoryDetailsCard = ({ item, setResellProduct, handleReport }) => {
   } = item;
 
   const [email] = useAdmin(seller_email);
-  console.log(email);
+  // console.log(email);
   return (
     <div>
       <div className="relative bg-white h-[650px]">

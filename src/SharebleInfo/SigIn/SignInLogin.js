@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../../AuthContext/AuthContext";
 import useToken from "../../CustomHook/UseToken/UseToken";
 import Loding from "../Lodin/Loding";
@@ -11,7 +11,6 @@ const SignInLogin = () => {
   // usetitle
   const [firebaseError, setFirebaseError] = useState("");
 
-  const navigate = useNavigate();
   // userContext
   const { userLogin, setLoading, loading, googleSignUp } =
     useContext(UserContext);
@@ -21,6 +20,11 @@ const SignInLogin = () => {
   const [loginUserEmail, setLoginUserEmail] = useState("");
   // console.log(loginUserEmail);
   const [token] = useToken(loginUserEmail);
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const from = location?.state?.from?.pathname || "/";
 
   const {
     register,
@@ -38,8 +42,7 @@ const SignInLogin = () => {
         setLoginUserEmail(data.email);
         setLoading(false);
         toast.success("successfully login");
-
-        // navigate("/");
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);

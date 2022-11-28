@@ -22,6 +22,9 @@ const HomeCategory = () => {
 
   return (
     <div className="bg-blue-200 rounded-lg mb-20">
+      <h1 className="text-5xl w-11/12 mx-auto pt-5 font-bold text-black">
+        Product Category
+      </h1>
       <div className="grid gap-10 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 py-20  w-11/12 mx-auto">
         {homeCategories.map((homeCategory) => (
           <HomeCategoryCard

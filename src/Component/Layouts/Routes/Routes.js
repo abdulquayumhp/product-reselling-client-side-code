@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import ProtectedRoute from "../../../CustomHook/PrivateRoute/ProtectedRoute";
+import ErrorPage from "../../../SharebleInfo/ErrorPage/ErrorPage";
 import SignIn from "../../../SharebleInfo/SigIn/SignIn";
 import SignUp from "../../../SharebleInfo/SignUp/SignUp";
 import Blog from "../../Pages/Blog/Blog";
@@ -24,6 +25,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",
@@ -51,14 +53,23 @@ export const router = createBrowserRouter([
       },
       {
         path: "/booking/:id",
-        element: <Bookings />,
-        loader: ({ params }) => fetch(``),
+        element: (
+          <ProtectedRoute>
+            <Bookings />
+          </ProtectedRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(
+            `https://assaignment-tharteen.vercel.app/home/category/${params.id}`
+          ),
       },
     ],
   },
   {
     path: "/",
     element: <Sign />,
+    errorElement: <ErrorPage />,
+
     children: [
       {
         path: "/signIn",
@@ -74,6 +85,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dasboard />,
+    errorElement: <ErrorPage />,
     children: [
       {
         path: "/dashboard/Admin",

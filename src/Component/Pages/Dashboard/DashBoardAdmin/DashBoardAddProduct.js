@@ -270,15 +270,11 @@ years_of_use"
           />
         </div>
         <div className="space-y-1 text-sm mt-10 ">
-          {loading ? (
-            <Loding />
-          ) : (
-            <input
-              type="submit"
-              value="Add Product"
-              className="lg:w-4/5 border-white border  w-full px-4 py-2  hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black"
-            />
-          )}
+          <input
+            type="submit"
+            value="Add Product"
+            className="lg:w-4/5 border-white border  w-full px-4 py-2  hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black"
+          />
         </div>
 
         <div>{signUpError && <p>{signUpError}</p>}</div>
