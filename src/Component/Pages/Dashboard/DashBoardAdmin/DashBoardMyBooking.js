@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import { toast } from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { UserContext } from "../../../../AuthContext/AuthContext";
 import Loding from "../../../../SharebleInfo/Lodin/Loding";
@@ -27,17 +28,20 @@ const DashBoardMyBooking = () => {
     },
   });
 
-  console.log(resellMyBooking);
+  // console.log(resellMyBooking);
   const handleDelete = (id) => {
     // console.log(id);
-    const url = `${process.env.REACT_APP_LOCALHOST}myBookingDelete/${id}`;
+    if (window.confirm("are you sure if you delate you can't recover data")) {
+      const url = `${process.env.REACT_APP_LOCALHOST}myBookingDelete/${id}`;
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((update) => {
-        console.log(update.data);
-        refetch();
-      });
+      fetch(url)
+        .then((res) => res.json())
+        .then((update) => {
+          console.log(update.data);
+          refetch();
+          toast.success(" Successfully Delate ");
+        });
+    }
   };
 
   if (isLoading) {
@@ -78,13 +82,13 @@ const DashBoardMyBooking = () => {
                           src={resellUser.picture}
                         />
                       </th>
-                      <td>{resellUser?.name}</td>
-                      <td>{resellUser?.location}</td>
-                      <td>{resellUser?.original_Price}</td>
-                      <td>{resellUser?.resale_price}</td>
-                      <td>{resellUser?.years_of_use}</td>
-                      <td>{resellUser?.capacity}</td>
-                      <td>{resellUser?.color}</td>
+                      <td className="text-sm">{resellUser?.name}</td>
+                      <td className="text-sm">{resellUser?.location}</td>
+                      <td className="text-sm">{resellUser?.original_Price}</td>
+                      <td className="text-sm">{resellUser?.resale_price}</td>
+                      <td className="text-sm">{resellUser?.years_of_use}</td>
+                      <td className="text-sm">{resellUser?.capacity}</td>
+                      <td className="text-sm">{resellUser?.color}</td>
                       <td>
                         <button
                           onClick={() => handleDelete(resellUser?._id)}
@@ -102,7 +106,12 @@ const DashBoardMyBooking = () => {
                           </Link>
                         )}
                         {resellUser?.resale_price && resellUser.paid && (
-                          <p>Paid</p>
+                          <>
+                            <p>Transaction Id</p>
+                            <p className="text-sm">
+                              {resellUser?.transactionId}
+                            </p>
+                          </>
                         )}
                       </td>
                     </tr>

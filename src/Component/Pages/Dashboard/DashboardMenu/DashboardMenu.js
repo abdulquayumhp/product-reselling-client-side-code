@@ -19,16 +19,6 @@ const DashboardMenu = () => {
   // console.log(email.role);
   return (
     <div class="flex flex-col  h-full py-8  border-r dark:bg-gray-900 dark:border-gray-700">
-      <Link to="/">
-        <div className="">
-          <img
-            className=" md:h-16  object-cover"
-            src="https://assets.vakilsearch.com/live-gif/zolvitWhiteTransparent.gif"
-            alt="/"
-          />
-        </div>
-      </Link>
-
       <div class="flex flex-col items-center mt-6 -mx-2">
         <img
           class="object-cover w-24 h-24 mx-2 rounded-full"
@@ -165,14 +155,3 @@ const DashboardMenu = () => {
 };
 
 export default DashboardMenu;
-
-{
-  /* <Link
-            to="/dashboard/dashboardAllReport"
-            class="flex items-center px-4 py-2 mt-5 text-gray-600 transition-colors duration-300 transform dark:text-gray-400 hover:bg-white dark:hover:bg-gray-700 dark:hover:text-gray-200 hover:text-gray-700"
-          >
-            <FaRegTrashAlt />
-
-            <span class="mx-4 font-medium">All Report</span>
-          </Link> */
-}

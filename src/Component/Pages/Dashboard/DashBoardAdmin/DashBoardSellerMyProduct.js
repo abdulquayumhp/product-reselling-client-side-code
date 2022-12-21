@@ -39,14 +39,17 @@ const DashBoardSellerMyProduct = () => {
 
   const handleDelete = (id) => {
     // console.log(id);
-    const url = `${process.env.REACT_APP_LOCALHOST}myProductDelete/${id}`;
 
-    fetch(url)
-      .then((res) => res.json())
-      .then((update) => {
-        console.log(update.data);
-        refetch();
-      });
+    if (window.confirm("are you sure if you delate you can't recover data")) {
+      const url = `${process.env.REACT_APP_LOCALHOST}myProductDelete/${id}`;
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((update) => {
+          console.log(update.data);
+          refetch();
+        });
+    }
   };
 
   const handleAdvertising = (e) => {
@@ -94,7 +97,7 @@ const DashBoardSellerMyProduct = () => {
               <th></th>
               <th>Img</th>
               <th>Name</th>
-              <th>Category</th>
+              <th>Delate</th>
               <th>Date</th>
               <th>Original Price</th>
               <th>Resale Price</th>
@@ -115,7 +118,14 @@ const DashBoardSellerMyProduct = () => {
                       />
                     </th>
                     <td>{resellUser.name}</td>
-                    <td>{resellUser.category_name}</td>
+                    <td>
+                      <button
+                        onClick={() => handleDelete(resellUser?._id)}
+                        className="bg-blue-200 py-2 px-5 cursor-pointer hover:bg-blue-300"
+                      >
+                        Delete
+                      </button>
+                    </td>
                     <td>{resellUser.date}</td>
                     <td>{resellUser.original_Price}</td>
                     <td>{resellUser.resale_price}</td>

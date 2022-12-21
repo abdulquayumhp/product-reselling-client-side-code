@@ -25,7 +25,9 @@ const SignInLogin = () => {
   const navigate = useNavigate();
 
   const from = location?.state?.from?.pathname || "/";
-
+  if (token) {
+    navigate(from, { replace: true });
+  }
   const {
     register,
     handleSubmit,
@@ -42,7 +44,6 @@ const SignInLogin = () => {
         setLoginUserEmail(data.email);
         setLoading(false);
         toast.success("successfully login");
-        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
@@ -56,7 +57,7 @@ const SignInLogin = () => {
     googleSignUp()
       .then((update) => {
         const user = update.user;
-        console.log("google", user);
+        // console.log("google", user);
         setLoginUserEmail(user.email);
         setLoading(false);
         toast.success("successfully Google login");

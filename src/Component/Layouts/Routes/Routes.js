@@ -16,7 +16,9 @@ import DashBoardMyBooking from "../../Pages/Dashboard/DashBoardAdmin/DashBoardMy
 import DashBoardSellerMyProduct from "../../Pages/Dashboard/DashBoardAdmin/DashBoardSellerMyProduct";
 import DashboardForAll from "../../Pages/Dashboard/DashboardForAll/DashboardForAll";
 import HomeAll from "../../Pages/Home/Home/HomeAll";
+import BdOnlinePayment from "../../Pages/Payment/BdOnlinePayment";
 import Payment from "../../Pages/Payment/Payment";
+import PaymentFail from "../../Pages/Payment/PaymentFail";
 import Service from "../../Pages/Service/Service";
 import Main from "../Main/Main";
 import Sign from "../Sign/Sign";
@@ -118,6 +120,14 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/myProduct",
         element: <DashBoardSellerMyProduct />,
+      },
+      {
+        path: "/dashboard/payment/success",
+        element: <BdOnlinePayment />,
+      },
+      {
+        path: "/dashboard/payment/fail",
+        element: <PaymentFail />,
       },
       {
         path: "/dashboard/payment/:id",

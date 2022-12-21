@@ -91,6 +91,7 @@ const DashBoardAddProduct = () => {
             if (res.data.acknowledged) {
               toast.success("add product successfully done");
               setLoading(false);
+              navigate("/dashboard/dashboardMyBooking");
               console.log(res);
             }
           });
@@ -129,6 +130,7 @@ const DashBoardAddProduct = () => {
           </label>
           <input
             type="text"
+            required
             name="productName"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -140,6 +142,7 @@ const DashBoardAddProduct = () => {
           <input
             type="text"
             name="capacity"
+            required
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
         </div>
@@ -151,6 +154,7 @@ const DashBoardAddProduct = () => {
           >
             <input
               type="file"
+              required
               name="image"
               id="image"
               accept="image/*"
@@ -165,6 +169,7 @@ const DashBoardAddProduct = () => {
           </label>
           <input
             type="text"
+            required
             name="color"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -178,6 +183,7 @@ const DashBoardAddProduct = () => {
           </label>
           <input
             type="number"
+            required
             name="originalPrice"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -192,6 +198,7 @@ const DashBoardAddProduct = () => {
           </label>
           <input
             type="number"
+            required
             name="resellPrice"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -207,6 +214,7 @@ years_of_use"
           </label>
           <input
             type="number"
+            required
             name="years"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -217,6 +225,7 @@ years_of_use"
           </label>
           <input
             type="text"
+            required
             name="location"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -228,6 +237,7 @@ years_of_use"
           </label>
           <input
             type="text"
+            required
             defaultValue={user?.displayName}
             disabled
             name="sellerName"
@@ -240,6 +250,7 @@ years_of_use"
           </label>
           <input
             type="text"
+            required
             defaultValue={user?.email}
             disabled
             name="email"
@@ -253,6 +264,7 @@ years_of_use"
           </label>
           <input
             type="number"
+            required
             name="mobileNumber"
             className="lg:w-4/5 border-blue-400 border  w-full px-4 py-2  bg-blue-100 text-black outline-none placeholder-black"
           />
@@ -263,6 +275,7 @@ years_of_use"
           </label>
           <input
             type="text"
+            required
             defaultValue={date}
             disabled
             name="date"
@@ -270,11 +283,15 @@ years_of_use"
           />
         </div>
         <div className="space-y-1 text-sm mt-10 ">
-          <input
-            type="submit"
-            value="Add Product"
-            className="lg:w-4/5 border-white border  w-full px-4 py-2  hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black"
-          />
+          {loading ? (
+            <Loding />
+          ) : (
+            <input
+              type="submit"
+              value="Add Product"
+              className="lg:w-4/5 border-white border  w-full px-4 py-2  hover:bg-blue-200 bg-blue-300  outline-none placeholder-white text-black"
+            />
+          )}
         </div>
 
         <div>{signUpError && <p>{signUpError}</p>}</div>

@@ -36,7 +36,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className="navbar bg-blue-200  text-slate-200 ">
+      <div className="navbar bg-blue-200  text-slate-200 print:hidden">
         <div className="navbar-start ">
           {/* mobile  */}
           <div className="dropdown">
